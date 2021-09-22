@@ -7,6 +7,8 @@
     :confirmText="state.confirmText"
     :cancelColor="state.cancelColor"
     :confirmColor="state.confirmColor"
+    :confirm-checkbox-label="state.confirmCheckboxLabel"
+    :confirm-checkbox-label-color="state.confirmCheckboxLabelColor"
     v-on:cancelAction="() => this.emmitClose(false)"
     v-on:confirmAction="() => this.emmitClose(true)"
   />
@@ -25,6 +27,8 @@ export default {
         confirmText: "",
         cancelColor: "",
         confirmColor: "",
+        confirmCheckboxLabel: null,
+        confirmCheckboxLabelColor: null,
         promiseResolver: undefined,
         promiseRejecter: undefined
       }

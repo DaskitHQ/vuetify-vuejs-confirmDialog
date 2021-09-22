@@ -36,7 +36,7 @@ Plugin.prototype.destroy = function() {
   }
 };
 
-Plugin.prototype.open = function(title, text, cancelText, confirmText, cancelColor=null, confirmColor=null) {
+Plugin.prototype.open = function(title, text, cancelText, confirmText, opts={}) {
   this.mountIfNotMounted();
   return new Promise((resolve, reject) => {
     let localOptions = {};
@@ -44,11 +44,15 @@ Plugin.prototype.open = function(title, text, cancelText, confirmText, cancelCol
     localOptions.text = text;
     localOptions.cancelText = cancelText;
     localOptions.confirmText = confirmText;
-    localOptions.cancelColor = cancelColor;
-    localOptions.confirmColor = confirmColor;
-
+    
+    localOptions.cancelColor = opts.cancelColor;
+    localOptions.confirmColor = opts.confirmColor;
+    localOptions.confirmCheckboxLabel = opts.confirmCheckboxLabel;
+    localOptions.confirmCheckboxLabelColor = opts.confirmCheckboxLabelColor;
+    
     localOptions.promiseResolver = resolve;
     localOptions.promiseRejecter = reject;
+    
 
     localOptions.isOpen = true;
     this.$root.commit(localOptions);

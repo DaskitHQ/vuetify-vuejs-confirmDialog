@@ -70,7 +70,19 @@ export default {
   methods: {
     sample: function() {
       this.$vuetifyConfirmDialog
-        .open("Example Title", "Are you sure ?", "Cancel", "Confirm", "red", "green")
+        .open(
+            "Example Title",
+            "Are you sure ?",
+            "Cancel", 
+            "Confirm",
+            // all the arguments bellow are optional
+            {
+              cancelColor: "red",
+              confirmColor: "green",
+              confirmCheckboxLabel: "I understand", // if present add a confirmation checkbox
+              confirmCheckboxLabelColor: "red",
+            }
+        )
         .then(state => {
           console.log(state);
         });
@@ -92,6 +104,8 @@ export default {
     confirmText="Confirm"
     cancelColor="red"
     confirmColor="green"
+    confirmCheckboxLabel="I understand"
+    confirmCheckboxLabelColor="red"
     v-on:cancelAction="() => this.showConfirm = false"
     v-on:confirmAction="() => this.showConfirm = false"
   />
@@ -103,7 +117,7 @@ export default {
   Vue.use(confirmDialog);
 
   export default {
-    name: 'example'
+    name: 'example',
     data(){
       return {
         "showConfirm": true
@@ -118,3 +132,48 @@ export default {
 **cancelColor**: String
 
 **confirmColor**: String
+
+**confirmCheckboxLabel**: String - if present add a confirmation checkbox
+
+**confirmCheckboxLabelColor**: String - color of the checkbox label
+
+
+## Update from 1.x to 2.x
+### Promise
+Custom button colors are now in a object with all the non-mandatory options.
+
+Before: 
+```javascript
+this.$vuetifyConfirmDialog
+    .open(
+        "Example Title",
+        "Are you sure ?",
+        "Cancel", 
+        "Confirm",
+        "red",
+        "green",
+    )
+    .then(state => {
+      console.log(state);
+    });
+```
+After : 
+```javascript
+this.$vuetifyConfirmDialog
+    .open(
+        "Example Title",
+        "Are you sure ?",
+        "Cancel", 
+        "Confirm",
+        {
+          cancelColor: "red",
+          confirmColor: "green",
+        }
+    )
+    .then(state => {
+      console.log(state);
+    });
+```
+
+### Component
+You have noting to do 🙂
